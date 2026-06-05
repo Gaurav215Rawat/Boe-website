@@ -100,7 +100,7 @@ export default function App() {
     if (!container) return;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050505, 0.0015);
+    scene.fog = new THREE.FogExp2(0x020617, 0.0015);
 
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 30;
@@ -119,7 +119,7 @@ export default function App() {
       const geom = new THREE.BoxGeometry(width, height, depth);
       const edges = new THREE.EdgesGeometry(geom);
       const material = new THREE.LineBasicMaterial({
-        color: 0xf1e0c3,
+        color: 0x3b82f6,
         transparent: true,
         opacity: 0.12
       });
@@ -127,7 +127,7 @@ export default function App() {
       group.add(outerFrame);
       
       const floorMaterial = new THREE.LineBasicMaterial({
-        color: 0x4b463d,
+        color: 0x1e293b,
         transparent: true,
         opacity: 0.15
       });
@@ -157,7 +157,7 @@ export default function App() {
       const coreGeom = new THREE.BufferGeometry();
       coreGeom.setAttribute('position', new THREE.Float32BufferAttribute(corePoints, 3));
       const coreMaterial = new THREE.LineBasicMaterial({
-        color: 0xf1e0c3,
+        color: 0x60a5fa,
         transparent: true,
         opacity: 0.06
       });
@@ -170,7 +170,7 @@ export default function App() {
     function createTrussBridge(length, height, depth, panels) {
       const group = new THREE.Group();
       const trussMaterial = new THREE.LineBasicMaterial({
-        color: 0xf1e0c3,
+        color: 0x3b82f6,
         transparent: true,
         opacity: 0.12
       });
@@ -214,7 +214,7 @@ export default function App() {
       }
       const deckGeom = new THREE.BufferGeometry();
       deckGeom.setAttribute('position', new THREE.Float32BufferAttribute(deckPoints, 3));
-      const deckMat = new THREE.LineBasicMaterial({ color: 0xB5A48B, transparent: true, opacity: 0.06 });
+      const deckMat = new THREE.LineBasicMaterial({ color: 0x1e293b, transparent: true, opacity: 0.06 });
       group.add(new THREE.LineSegments(deckGeom, deckMat));
 
       return { group, trussMaterial };
@@ -226,16 +226,20 @@ export default function App() {
     const buildingMaterials = [];
     const buildingFloorMaterials = [];
     
-    // Generate 8 buildings for a denser skyline
+    // Generate 12 buildings for a dense, immersive skyline
     const buildingConfigs = [
-      { x: -55, y: -18, z: -40, w: 14, h: 55, d: 14 },
-      { x: -30, y: -12, z: -35, w: 18, h: 70, d: 16 },
-      { x: -5, y: -15, z: -45, w: 12, h: 45, d: 12 },
-      { x: 15, y: -10, z: -30, w: 20, h: 80, d: 18 },
-      { x: 40, y: -18, z: -38, w: 15, h: 50, d: 14 },
-      { x: 60, y: -14, z: -42, w: 13, h: 60, d: 13 },
-      { x: -45, y: -20, z: -55, w: 10, h: 35, d: 10 },
-      { x: 30, y: -22, z: -52, w: 11, h: 40, d: 11 },
+      { x: -70, y: -16, z: -35, w: 16, h: 65, d: 16 },
+      { x: -45, y: -10, z: -30, w: 20, h: 85, d: 18 },
+      { x: -20, y: -14, z: -40, w: 14, h: 55, d: 14 },
+      { x: 5, y: -8, z: -25, w: 22, h: 95, d: 20 },
+      { x: 30, y: -16, z: -35, w: 16, h: 60, d: 16 },
+      { x: 55, y: -12, z: -38, w: 15, h: 72, d: 15 },
+      { x: 80, y: -18, z: -45, w: 12, h: 48, d: 12 },
+      { x: -60, y: -20, z: -60, w: 11, h: 40, d: 11 },
+      { x: -10, y: -22, z: -65, w: 10, h: 35, d: 10 },
+      { x: 45, y: -20, z: -58, w: 13, h: 45, d: 13 },
+      { x: 70, y: -24, z: -70, w: 9, h: 30, d: 9 },
+      { x: -35, y: -22, z: -68, w: 10, h: 38, d: 10 },
     ];
     
     buildingConfigs.forEach((cfg) => {
@@ -248,30 +252,66 @@ export default function App() {
       buildingFloorMaterials.push(bObj.floorMaterial);
     });
 
-    // Ground grid for home
-    const homeGrid = new THREE.GridHelper(200, 60, 0xf1e0c3, 0x1a1c1c);
+    // Ground grid for home — brighter and wider
+    const homeGrid = new THREE.GridHelper(300, 80, 0x3b82f6, 0x0f172a);
     homeGrid.position.y = -40;
-    homeGrid.material.opacity = 0.06;
+    homeGrid.material.opacity = 0.1;
     homeGrid.material.transparent = true;
     homeGroup.add(homeGrid);
 
-    // Floating particles
+    // Accent point lights to illuminate the scene with blue glow
+    const accentLight1 = new THREE.PointLight(0x3b82f6, 2.5, 120);
+    accentLight1.position.set(-30, 40, -20);
+    homeGroup.add(accentLight1);
+    const accentLight2 = new THREE.PointLight(0x60a5fa, 1.8, 100);
+    accentLight2.position.set(40, 30, -15);
+    homeGroup.add(accentLight2);
+    const accentLight3 = new THREE.PointLight(0x1d4ed8, 1.5, 150);
+    accentLight3.position.set(0, -10, 10);
+    homeGroup.add(accentLight3);
+
+    // Floating particles — much denser and brighter
     const dustGeometry = new THREE.BufferGeometry();
-    const dustCount = 600;
+    const dustCount = 1500;
     const dustArray = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount * 3; i++) {
-      dustArray[i] = (Math.random() - 0.5) * 200;
+      dustArray[i] = (Math.random() - 0.5) * 280;
     }
     dustGeometry.setAttribute('position', new THREE.BufferAttribute(dustArray, 3));
     const dustMaterial = new THREE.PointsMaterial({
-      size: 0.12,
-      color: 0xf1e0c3,
+      size: 0.18,
+      color: 0x93c5fd,
       transparent: true,
-      opacity: 0.3,
+      opacity: 0.5,
       blending: THREE.AdditiveBlending
     });
     const dustMesh = new THREE.Points(dustGeometry, dustMaterial);
     homeGroup.add(dustMesh);
+
+    // Orbiting energy ring
+    const energyRingGeom = new THREE.TorusGeometry(55, 0.15, 16, 120);
+    const energyRingMat = new THREE.MeshBasicMaterial({
+      color: 0x3b82f6,
+      transparent: true,
+      opacity: 0.18,
+    });
+    const energyRing = new THREE.Mesh(energyRingGeom, energyRingMat);
+    energyRing.position.y = -5;
+    energyRing.rotation.x = Math.PI / 2.2;
+    homeGroup.add(energyRing);
+
+    // Second energy ring — slightly offset
+    const energyRing2Geom = new THREE.TorusGeometry(70, 0.1, 16, 100);
+    const energyRing2Mat = new THREE.MeshBasicMaterial({
+      color: 0x60a5fa,
+      transparent: true,
+      opacity: 0.1,
+    });
+    const energyRing2 = new THREE.Mesh(energyRing2Geom, energyRing2Mat);
+    energyRing2.position.y = 5;
+    energyRing2.rotation.x = Math.PI / 2.5;
+    homeGroup.add(energyRing2);
+
     scene.add(homeGroup);
 
     // ─── SERVICES GROUP ───
@@ -280,7 +320,7 @@ export default function App() {
     bridgeObj.group.position.set(0, -5, -20);
     servicesGroup.add(bridgeObj.group);
 
-    const servicesGridHelper = new THREE.GridHelper(140, 50, 0xf1e0c3, 0x1a1c1c);
+    const servicesGridHelper = new THREE.GridHelper(140, 50, 0x3b82f6, 0x0f172a);
     servicesGridHelper.position.y = -13;
     servicesGridHelper.material.opacity = 0.08;
     servicesGridHelper.material.transparent = true;
@@ -295,7 +335,7 @@ export default function App() {
     servicesParticlesGeometry.setAttribute('position', new THREE.BufferAttribute(servicesPosArray, 3));
     const servicesParticlesMaterial = new THREE.PointsMaterial({
       size: 0.08,
-      color: 0xf1e0c3,
+      color: 0x93c5fd,
       transparent: true,
       opacity: 0.25,
       blending: THREE.AdditiveBlending
@@ -309,7 +349,7 @@ export default function App() {
     const domeGeom = new THREE.IcosahedronGeometry(50, 2);
     const domeEdges = new THREE.EdgesGeometry(domeGeom);
     const domeMaterial = new THREE.LineBasicMaterial({
-      color: 0xf1e0c3,
+      color: 0x3b82f6,
       transparent: true,
       opacity: 0.1
     });
@@ -320,7 +360,7 @@ export default function App() {
     // Grid planes
     const aboutGridGeometry = new THREE.BufferGeometry();
     const aboutGridMaterial = new THREE.LineBasicMaterial({
-      color: 0x1a1c1c,
+      color: 0x0f172a,
       transparent: true,
       opacity: 0.4
     });
@@ -350,14 +390,14 @@ export default function App() {
       aboutVPoints.push(snappedX, -100, snappedZ, snappedX, 100, snappedZ);
     }
     aboutVGeo.setAttribute('position', new THREE.Float32BufferAttribute(aboutVPoints, 3));
-    const aboutVMaterial = new THREE.LineBasicMaterial({ color: 0x1a1c1c, transparent: true, opacity: 0.2 });
+    const aboutVMaterial = new THREE.LineBasicMaterial({ color: 0x0f172a, transparent: true, opacity: 0.2 });
     aboutGroup.add(new THREE.LineSegments(aboutVGeo, aboutVMaterial));
     scene.add(aboutGroup);
 
     // ─── CONTACT GROUP ───
     const contactGroup = new THREE.Group();
     const ringMaterial = new THREE.LineBasicMaterial({
-      color: 0xf1e0c3,
+      color: 0x3b82f6,
       transparent: true,
       opacity: 0.08,
       blending: THREE.AdditiveBlending
@@ -419,15 +459,25 @@ export default function App() {
       // HOME
       homeGroup.visible = currentHomeOpacity > 0.01;
       if (homeGroup.visible) {
-        buildingMaterials.forEach((mat) => mat.opacity = currentHomeOpacity * 0.12);
-        buildingFloorMaterials.forEach((mat) => mat.opacity = currentHomeOpacity * 0.15);
-        dustMaterial.opacity = currentHomeOpacity * 0.3;
+        buildingMaterials.forEach((mat) => mat.opacity = currentHomeOpacity * 0.18);
+        buildingFloorMaterials.forEach((mat) => mat.opacity = currentHomeOpacity * 0.22);
+        dustMaterial.opacity = currentHomeOpacity * 0.5;
         
         buildings.forEach((bld, idx) => {
           bld.rotation.y = t * 0.015 * (idx % 2 === 0 ? 1 : -1);
         });
         dustMesh.rotation.y = t * 0.008;
         dustMesh.rotation.x = Math.sin(t * 0.1) * 0.02;
+
+        // Animate energy rings
+        energyRing.rotation.z = t * 0.08;
+        energyRingMat.opacity = currentHomeOpacity * (0.15 + Math.sin(t * 0.5) * 0.05);
+        energyRing2.rotation.z = -t * 0.06;
+        energyRing2Mat.opacity = currentHomeOpacity * (0.08 + Math.sin(t * 0.3) * 0.04);
+
+        // Pulse accent lights
+        accentLight1.intensity = 2.5 + Math.sin(t * 0.8) * 0.8;
+        accentLight2.intensity = 1.8 + Math.sin(t * 0.6 + 1) * 0.6;
       }
 
       // SERVICES
@@ -451,36 +501,36 @@ export default function App() {
         aboutGroup.rotation.x = scrollY * 0.0003;
       }
 
-      // CONTACT
+      // CONTACT — brighter rings so they show through the transparent hero
       contactGroup.visible = currentContactOpacity > 0.01;
       if (contactGroup.visible) {
-        ringMaterial.opacity = currentContactOpacity * 0.1;
-        contactGroup.rotation.y = t * 0.03;
-        contactGroup.rotation.x = Math.sin(t * 0.15) * 0.06;
+        ringMaterial.opacity = currentContactOpacity * 0.25;
+        contactGroup.rotation.y = t * 0.04;
+        contactGroup.rotation.x = Math.sin(t * 0.15) * 0.1;
       }
 
       // Camera
       if (currentActive === 'home') {
-        scene.fog.color.setHex(0x050505);
+        scene.fog.color.setHex(0x020617);
         const targetZ = 35 - scrollY * 0.012;
         camera.position.z += (targetZ - camera.position.z) * 0.04;
         camera.position.x += (mouseX * 0.12 - camera.position.x) * 0.04;
         camera.position.y += (-mouseY * 0.08 - scrollY * 0.004 - camera.position.y) * 0.04;
         camera.lookAt(scene.position);
       } else if (currentActive === 'services') {
-        scene.fog.color.setHex(0x050505);
+        scene.fog.color.setHex(0x020617);
         camera.position.z += (45 - camera.position.z) * 0.04;
         camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.04;
         camera.position.y += (10 + Math.sin(t * 0.35) * 1.2 - camera.position.y) * 0.04;
         camera.lookAt(0, 0, 0);
       } else if (currentActive === 'about') {
-        scene.fog.color.setHex(0x050505);
+        scene.fog.color.setHex(0x020617);
         camera.position.z += (280 - camera.position.z) * 0.04;
         camera.position.y += (60 - camera.position.y) * 0.04;
         camera.position.x += (mouseX * 0.4 - camera.position.x) * 0.04;
         camera.lookAt(0, -30, 0);
       } else if (currentActive === 'contact') {
-        scene.fog.color.setHex(0x050505);
+        scene.fog.color.setHex(0x020617);
         camera.position.z += (65 - camera.position.z) * 0.04;
         camera.position.y += (12 + Math.sin(t * 0.25) * 2 - camera.position.y) * 0.04;
         camera.position.x += (mouseX * 0.1 - camera.position.x) * 0.04;
@@ -523,7 +573,7 @@ export default function App() {
       {loading && (
         <div className="fixed inset-0 z-[9000] bg-deep-obsidian flex flex-col items-center justify-center">
           <div className="relative mb-12">
-            <div className="font-headline-lg text-7xl text-gradient-gold italic tracking-widest">BOE</div>
+            <div className="font-headline-lg text-7xl text-gradient-blue italic tracking-widest">BOE</div>
             <div className="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
           </div>
           <div className="w-72 h-[2px] bg-warm-charcoal relative overflow-hidden rounded-full">
@@ -625,12 +675,12 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer id="footer" className="bg-deep-obsidian border-t border-primary/5 py-24 px-6 md:px-margin-desktop relative z-10">
+      <footer id="footer" className="bg-deep-obsidian/40 backdrop-blur-md border-t border-primary/10 py-24 px-6 md:px-margin-desktop relative z-10">
         <div className="grid grid-cols-12 gap-y-12 md:gap-gutter pb-20 border-b border-warm-charcoal/20 mb-10 max-w-container-max mx-auto">
           <div className="col-span-12 md:col-span-5">
             <div className="font-headline-lg text-4xl mb-8">
               Bureau of <br />
-              <i className="text-gradient-gold font-serif">Engineering</i>
+              <i className="text-gradient-blue font-serif">Engineering</i>
             </div>
             <p className="text-[15px] text-on-surface-variant leading-[1.9] max-w-md font-light">
               The City of Los Angeles' lead agency for planning, design, and construction of public buildings and infrastructure. Serving 4 million Angelenos since 1906.
@@ -726,40 +776,40 @@ function HomeView({ setActivePage }) {
         <div className="relative z-10 px-6 md:px-margin-desktop pb-24 max-w-container-max mx-auto w-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-gutter">
             <div className="md:col-span-9">
-              <p className="text-[10px] font-label-caps tracking-[0.4em] uppercase text-primary/60 flex items-center gap-4 mb-8 reveal-item">
-                <span className="w-16 h-[1px] bg-gradient-to-r from-primary/60 to-transparent"></span>
+              <p className="text-[10px] font-label-caps tracking-[0.4em] uppercase text-primary/60 flex items-center gap-4 mb-8 hero-animate-label">
+                <span className="hero-line h-[1px] bg-gradient-to-r from-primary/60 to-transparent"></span>
                 Est. 1906 · Public Works
               </p>
-              <h1 className="font-headline-lg text-[clamp(3.2rem,12vw,9rem)] leading-[0.9] tracking-tight mb-14 reveal-item reveal-delay-1">
-                <span className="block opacity-90">Engineering</span>
-                <span className="block opacity-90">Los Angeles'</span>
-                <span className="block text-gradient-gold italic font-serif">Future.</span>
+              <h1 className="font-headline-lg text-[clamp(3.2rem,12vw,9rem)] leading-[0.9] tracking-tight mb-14">
+                <span className="block opacity-90 hero-animate-h1-1">Engineering</span>
+                <span className="block opacity-90 hero-animate-h1-2">Los Angeles'</span>
+                <span className="block text-gradient-blue italic font-serif hero-animate-h1-3">Future.</span>
               </h1>
             </div>
-            <div className="md:col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-10 mt-4 reveal-item reveal-delay-2">
+            <div className="md:col-span-12 flex flex-col md:flex-row md:items-end justify-between gap-10 mt-4 hero-animate-stats">
               <div className="flex items-center gap-12 md:gap-20">
                 <div>
-                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-gold leading-none mb-3">
+                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-blue leading-none mb-3">
                     <AnimatedCounter prefix="$" end={588} suffix="M" />
                   </span>
                   <span className="block text-[9px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Sixth St Viaduct</span>
                 </div>
                 <div className="w-[1px] h-14 bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden md:block"></div>
                 <div>
-                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-gold leading-none mb-3">
+                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-blue leading-none mb-3">
                     <AnimatedCounter end={12} suffix="ac" />
                   </span>
                   <span className="block text-[9px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Sixth Street PARC</span>
                 </div>
                 <div className="w-[1px] h-14 bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden md:block"></div>
                 <div>
-                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-gold leading-none mb-3">
+                  <span className="block font-headline-lg text-5xl md:text-6xl text-gradient-blue leading-none mb-3">
                     <AnimatedCounter end={118} suffix="yr" />
                   </span>
                   <span className="block text-[9px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Of Excellence</span>
                 </div>
               </div>
-              <p className="max-w-[38ch] text-[15px] leading-[1.9] text-on-surface-variant/70 font-light md:text-right">
+              <p className="max-w-[38ch] text-[15px] leading-[1.9] text-on-surface-variant/70 font-light md:text-right hero-animate-desc">
                 Lead agency for planning, design and construction management of LA's public infrastructure.
               </p>
             </div>
@@ -767,24 +817,24 @@ function HomeView({ setActivePage }) {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 opacity-40">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 hero-scroll-indicator">
           <span className="text-[9px] font-label-caps tracking-[0.3em] uppercase text-primary">Scroll</span>
           <div className="w-[1px] h-8 bg-gradient-to-b from-primary to-transparent"></div>
         </div>
       </section>
 
       {/* Marquee */}
-      <div className="overflow-hidden border-y border-primary/5 py-5 bg-deep-obsidian/80 backdrop-blur-xl relative z-10">
+      <div className="overflow-hidden border-y border-primary/10 py-5 bg-deep-obsidian/60 backdrop-blur-xl relative z-10">
         <div className="marquee-track">
           {[0, 1].map((i) => (
-            <div key={i} className="flex items-center gap-16 px-8 text-[10px] font-label-caps tracking-[0.3em] uppercase text-primary/30 whitespace-nowrap shrink-0">
-              <span>Infrastructure Design</span><span className="text-[5px]">◆</span>
-              <span>Bridge Engineering</span><span className="text-[5px]">◆</span>
-              <span>Stormwater Systems</span><span className="text-[5px]">◆</span>
-              <span>Public Buildings</span><span className="text-[5px]">◆</span>
-              <span>Street Design</span><span className="text-[5px]">◆</span>
-              <span>Permitting</span><span className="text-[5px]">◆</span>
-              <span>Seismic Analysis</span><span className="text-[5px]">◆</span>
+            <div key={i} className="flex items-center gap-16 px-8 text-[11px] font-label-caps tracking-[0.3em] uppercase text-white/70 whitespace-nowrap shrink-0">
+              <span>Infrastructure Design</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Bridge Engineering</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Stormwater Systems</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Public Buildings</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Street Design</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Permitting</span><span className="text-[6px] text-primary/40">◆</span>
+              <span>Seismic Analysis</span><span className="text-[6px] text-primary/40">◆</span>
               <span>Sustainability</span>
             </div>
           ))}
@@ -800,7 +850,7 @@ function HomeView({ setActivePage }) {
               <span className="text-[10px] font-label-caps tracking-[0.3em] uppercase text-primary/60">Our Mission</span>
             </div>
             <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight mb-10">
-              Building a <em className="italic text-gradient-gold font-serif">sustainable, livable</em> city
+              Building a <em className="italic text-gradient-blue font-serif">sustainable, livable</em> city
             </h2>
             <div className="reveal-item reveal-delay-2 text-[15px] leading-[2] text-on-surface-variant/70 font-light space-y-6">
               <p>The Bureau of Engineering is the City of Los Angeles' lead agency for the planning, design, and construction management of public buildings and infrastructure — from police and fire stations to bridges, streets, and wastewater systems.</p>
@@ -814,7 +864,7 @@ function HomeView({ setActivePage }) {
             </button>
           </div>
           <div className="md:col-span-5 md:col-start-8 order-1 md:order-2 reveal-item relative">
-            <div className="aspect-[4/5] relative overflow-hidden rounded-sm glow-gold">
+            <div className="aspect-[4/5] relative overflow-hidden rounded-sm glow-blue">
               <img 
                 src="/images/sustainability.png"
                 alt="Modern public building architecture" 
@@ -823,21 +873,21 @@ function HomeView({ setActivePage }) {
               <div className="absolute inset-0 bg-gradient-to-t from-deep-obsidian/80 via-transparent to-deep-obsidian/20"></div>
               <div className="absolute bottom-6 left-6 right-6 glass-panel p-6 flex justify-between items-center rounded-sm">
                 <div className="text-center">
-                  <span className="block font-headline-md text-3xl text-gradient-gold leading-none mb-2">
+                  <span className="block font-headline-md text-3xl text-gradient-blue leading-none mb-2">
                     <AnimatedCounter end={1906} />
                   </span>
                   <span className="block text-[8px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Founded</span>
                 </div>
                 <div className="w-[1px] h-10 bg-primary/10"></div>
                 <div className="text-center">
-                  <span className="block font-headline-md text-3xl text-gradient-gold leading-none mb-2">
+                  <span className="block font-headline-md text-3xl text-gradient-blue leading-none mb-2">
                     <AnimatedCounter end={2500} suffix="+" />
                   </span>
                   <span className="block text-[8px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Staff</span>
                 </div>
                 <div className="w-[1px] h-10 bg-primary/10"></div>
                 <div className="text-center">
-                  <span className="block font-headline-md text-3xl text-gradient-gold leading-none mb-2">
+                  <span className="block font-headline-md text-3xl text-gradient-blue leading-none mb-2">
                     <AnimatedCounter end={100} suffix="+" />
                   </span>
                   <span className="block text-[8px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/60">Projects</span>
@@ -857,7 +907,7 @@ function HomeView({ setActivePage }) {
                 <span className="w-10 h-[1px] bg-gradient-to-r from-primary to-transparent"></span>
                 <span className="text-[10px] font-label-caps tracking-[0.3em] uppercase text-primary/60">Featured Work</span>
               </div>
-              <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight">Landmark <em className="italic text-gradient-gold font-serif">projects</em></h2>
+              <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2.5rem,6vw,4.5rem)] leading-[1.05] tracking-tight">Landmark <em className="italic text-gradient-blue font-serif">projects</em></h2>
             </div>
             <button 
               onClick={() => setActivePage('services')}
@@ -871,7 +921,7 @@ function HomeView({ setActivePage }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
           {/* Card 1 */}
           <div className="group reveal-item">
-            <div className="h-[420px] md:h-[560px] relative overflow-hidden mb-8 rounded-sm glow-gold">
+            <div className="h-[420px] md:h-[560px] relative overflow-hidden mb-8 rounded-sm glow-blue">
               <img 
                 src="/images/bridge.png"
                 alt="Sixth Street Viaduct" 
@@ -894,7 +944,7 @@ function HomeView({ setActivePage }) {
 
           {/* Card 2 */}
           <div className="group reveal-item reveal-delay-2">
-            <div className="h-[420px] md:h-[560px] relative overflow-hidden mb-8 rounded-sm glow-gold">
+            <div className="h-[420px] md:h-[560px] relative overflow-hidden mb-8 rounded-sm glow-blue">
               <img 
                 src="/images/interior.png"
                 alt="Modern civic interior" 
@@ -919,16 +969,15 @@ function HomeView({ setActivePage }) {
 
       {/* Full-bleed Image CTA Section */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden my-10">
-        <div className="absolute inset-0">
-          <img src="/images/blueprint.png" alt="" className="w-full h-full object-cover opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-deep-obsidian via-deep-obsidian/80 to-deep-obsidian"></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-obsidian/60 via-transparent to-deep-obsidian/60"></div>
         </div>
         <div className="relative z-10 text-center max-w-3xl px-6">
           <div className="hr-diamond mb-10 reveal-item">
             <span className="text-[9px] font-label-caps tracking-[0.3em] uppercase text-primary/40">Engineering Excellence</span>
           </div>
           <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2rem,5vw,4rem)] leading-[1.1] tracking-tight mb-8">
-            Designing for <em className="italic text-gradient-gold font-serif">generations</em> to come
+            Designing for <em className="italic text-gradient-blue font-serif">generations</em> to come
           </h2>
           <p className="reveal-item reveal-delay-2 text-[15px] text-on-surface-variant/60 leading-[2] font-light max-w-xl mx-auto mb-12">
             Every structure we create is a promise to the future. We combine cutting-edge engineering with architectural artistry to build infrastructure that serves communities for a century and beyond.
@@ -949,7 +998,7 @@ function HomeView({ setActivePage }) {
             <span className="text-[9px] font-label-caps tracking-[0.3em] uppercase text-primary/40">Recognition</span>
           </div>
           <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight">
-            Award-Winning <em className="italic text-gradient-gold font-serif">Design</em>
+            Award-Winning <em className="italic text-gradient-blue font-serif">Design</em>
           </h2>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
@@ -961,7 +1010,7 @@ function HomeView({ setActivePage }) {
           ].map((item, i) => (
             <div key={i} className={`reveal-item reveal-delay-${i + 1} text-center glass-panel p-8 md:p-10 rounded-sm border border-primary/5 border-animate shine-effect`}>
               <span className="material-symbols-outlined text-primary/40 mb-4 block" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>{item.icon}</span>
-              <div className="font-headline-lg text-4xl md:text-5xl text-gradient-gold leading-none mb-3">
+              <div className="font-headline-lg text-4xl md:text-5xl text-gradient-blue leading-none mb-3">
                 <AnimatedCounter end={parseInt(item.number)} suffix={item.number === '4' ? 'M' : '+'} />
               </div>
               <span className="text-[9px] font-label-caps tracking-[0.25em] uppercase text-on-surface-variant/40">{item.label}</span>
@@ -988,7 +1037,7 @@ function ServicesView() {
             <div className="w-12 h-px bg-gradient-to-r from-primary/40 to-transparent"></div>
             <span className="font-label-caps text-[10px] tracking-[0.3em] text-primary/50 uppercase">SEC_01</span>
           </div>
-          <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-gold mb-8 max-w-5xl">
+          <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-blue mb-8 max-w-5xl">
             Core Disciplines.
           </h1>
           <p className="reveal-item reveal-delay-2 font-body-lg text-body-lg text-on-surface-variant/60 max-w-2xl leading-relaxed">
@@ -1016,7 +1065,7 @@ function ServicesView() {
                 <span className="material-symbols-outlined text-primary/60" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>architecture</span>
                 <span className="font-label-caps text-[10px] text-primary/40 tracking-[0.3em]">01</span>
               </div>
-              <h2 className="font-headline-lg text-4xl md:text-5xl text-gradient-gold mb-6">Infrastructure & Bridges</h2>
+              <h2 className="font-headline-lg text-4xl md:text-5xl text-gradient-blue mb-6">Infrastructure & Bridges</h2>
               <p className="font-body-lg text-body-lg text-on-surface-variant/60 max-w-2xl mb-10">
                 Engineering monumental connections. We design, construct, and maintain structurally advanced bridges and critical transport arteries that endure generations.
               </p>
@@ -1033,7 +1082,7 @@ function ServicesView() {
                 <span className="material-symbols-outlined text-primary/60" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>domain</span>
                 <span className="font-label-caps text-[10px] text-on-surface-variant/30 tracking-[0.3em]">02</span>
               </div>
-              <h2 className="font-headline-md text-3xl text-gradient-gold mb-5">Public Buildings</h2>
+              <h2 className="font-headline-md text-3xl text-gradient-blue mb-5">Public Buildings</h2>
               <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed">
                 Architectural excellence for civic institutions. From cutting-edge libraries to emergency response facilities, we build the spaces that serve the public.
               </p>
@@ -1051,7 +1100,7 @@ function ServicesView() {
                 <span className="material-symbols-outlined text-primary/60" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>water_drop</span>
                 <span className="font-label-caps text-[10px] text-on-surface-variant/30 tracking-[0.3em]">03</span>
               </div>
-              <h2 className="font-headline-md text-2xl text-gradient-gold mb-4">Stormwater & Sewers</h2>
+              <h2 className="font-headline-md text-2xl text-gradient-blue mb-4">Stormwater & Sewers</h2>
               <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed">
                 Hydraulic precision. Advanced subterranean networks managing urban water flow, ensuring environmental protection and sanitation.
               </p>
@@ -1069,7 +1118,7 @@ function ServicesView() {
                 <span className="material-symbols-outlined text-primary/60" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>assignment</span>
                 <span className="font-label-caps text-[10px] text-on-surface-variant/30 tracking-[0.3em]">04</span>
               </div>
-              <h2 className="font-headline-md text-2xl text-gradient-gold mb-4">Permits & Development</h2>
+              <h2 className="font-headline-md text-2xl text-gradient-blue mb-4">Permits & Development</h2>
               <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed">
                 Streamlined regulatory execution. Facilitating private and public development through rigorous, efficient permitting processes.
               </p>
@@ -1087,7 +1136,7 @@ function ServicesView() {
                 <span className="material-symbols-outlined text-primary/60" style={{ fontSize: '28px', fontVariationSettings: "'wght' 200" }}>map</span>
                 <span className="font-label-caps text-[10px] text-on-surface-variant/30 tracking-[0.3em]">05</span>
               </div>
-              <h2 className="font-headline-md text-2xl text-gradient-gold mb-4">NavigateLA Mapping</h2>
+              <h2 className="font-headline-md text-2xl text-gradient-blue mb-4">NavigateLA Mapping</h2>
               <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed">
                 Geospatial intelligence. Comprehensive digital mapping systems providing critical topographic and infrastructural data for strategic planning.
               </p>
@@ -1107,7 +1156,7 @@ function ServicesView() {
             <span className="text-[9px] font-label-caps tracking-[0.3em] uppercase text-primary/40">Methodology</span>
           </div>
           <h2 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight">
-            Our <em className="italic text-gradient-gold font-serif">Process</em>
+            Our <em className="italic text-gradient-blue font-serif">Process</em>
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -1148,7 +1197,7 @@ function AboutView() {
               <div className="blueprint-divider font-label-caps text-[10px] text-on-surface-variant/30 mb-8 w-64 tracking-[0.3em] reveal-item">
                 <span>SEC_01</span>
               </div>
-              <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-gold mb-8">
+              <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-blue mb-8">
                 Engineering a Legacy.
               </h1>
               <p className="reveal-item reveal-delay-2 font-body-lg text-body-lg text-on-surface-variant/60 max-w-2xl leading-relaxed">
@@ -1156,7 +1205,7 @@ function AboutView() {
               </p>
             </div>
             <div className="col-span-12 md:col-span-4 mt-12 md:mt-0 relative flex justify-end reveal-item reveal-delay-3">
-              <div className="w-full h-full min-h-[300px] border border-primary/5 relative overflow-hidden group rounded-sm glow-gold">
+              <div className="w-full h-full min-h-[300px] border border-primary/5 relative overflow-hidden group rounded-sm glow-blue">
                 <div className="absolute inset-0 bg-gradient-to-tr from-deep-obsidian/80 to-transparent z-10"></div>
                 <img 
                   src="/images/interior.png"
@@ -1186,7 +1235,7 @@ function AboutView() {
             <div key={i} className={`glass-panel p-10 md:p-12 border border-primary/5 group relative overflow-hidden reveal-item reveal-delay-${item.delay} rounded-sm transition-all duration-500 hover:border-primary/15 shine-effect ${item.offset ? 'md:translate-y-12' : ''}`}>
               <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               <span className="material-symbols-outlined text-primary/40 mb-8 text-4xl block" style={{ fontVariationSettings: "'wght' 200" }}>{item.icon}</span>
-              <h3 className="font-headline-md text-2xl text-gradient-gold mb-5">{item.title}</h3>
+              <h3 className="font-headline-md text-2xl text-gradient-blue mb-5">{item.title}</h3>
               <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed">{item.desc}</p>
             </div>
           ))}
@@ -1201,7 +1250,7 @@ function AboutView() {
               <div className="blueprint-divider font-label-caps text-[10px] text-on-surface-variant/30 mb-8 w-48 tracking-[0.3em] reveal-item">
                 <span>SEC_03 // CHRONOLOGY</span>
               </div>
-              <h2 className="reveal-item reveal-delay-1 font-headline-lg text-4xl md:text-5xl text-gradient-gold mb-6">Evolution of Form.</h2>
+              <h2 className="reveal-item reveal-delay-1 font-headline-lg text-4xl md:text-5xl text-gradient-blue mb-6">Evolution of Form.</h2>
               <p className="reveal-item reveal-delay-2 font-body-lg text-body-lg text-on-surface-variant/60 leading-relaxed">
                 A century of definitive public works, charting our progress from foundational infrastructure to contemporary architectural marvels.
               </p>
@@ -1217,13 +1266,13 @@ function AboutView() {
                 <div key={i} className="border-b border-primary/5 py-12 group hover:bg-surface-container/20 transition-colors duration-500 relative px-8 -mx-8 reveal-item">
                   <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-primary/5 group-hover:bg-primary/15 transition-colors duration-500"></div>
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-baseline mb-4">
-                    <span className="font-headline-md text-2xl text-gradient-gold w-32 shrink-0">{item.year}</span>
+                    <span className="font-headline-md text-2xl text-gradient-blue w-32 shrink-0">{item.year}</span>
                     <h3 className="font-headline-md text-2xl text-on-surface flex-grow">{item.title}</h3>
                   </div>
                   <div className="md:pl-32">
                     <p className="font-body-md text-body-md text-on-surface-variant/60 leading-relaxed max-w-xl mb-6">{item.desc}</p>
                     {item.hasImage && (
-                      <div className="h-48 w-full border border-primary/5 relative overflow-hidden rounded-sm glow-gold">
+                      <div className="h-48 w-full border border-primary/5 relative overflow-hidden rounded-sm glow-blue">
                         <img 
                           src="/images/bridge.png"
                           alt="Bridge architectural detail" 
@@ -1245,7 +1294,7 @@ function AboutView() {
           <div className="hr-diamond mb-10 reveal-item">
             <span className="text-[9px] font-label-caps tracking-[0.3em] uppercase text-primary/40">SEC_04 // Directors</span>
           </div>
-          <h2 className="reveal-item reveal-delay-1 font-headline-lg text-4xl md:text-5xl text-gradient-gold">Structural Leadership.</h2>
+          <h2 className="reveal-item reveal-delay-1 font-headline-lg text-4xl md:text-5xl text-gradient-blue">Structural Leadership.</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-gutter gap-y-20 max-w-4xl mx-auto">
           {[
@@ -1253,7 +1302,7 @@ function AboutView() {
             { name: 'Dr. Elena Rostova', role: 'Director of Sustainability', desc: 'A pioneer in biomimetic materials and passive thermodynamic systems. Elena ensures that every structure functions harmoniously within its local ecosystem.', code: 'DIR_02', offset: true },
           ].map((leader, i) => (
             <div key={i} className={`flex flex-col items-center text-center group reveal-item ${leader.offset ? 'md:mt-24' : ''}`}>
-              <div className="w-64 h-80 border border-primary/5 mb-8 relative overflow-hidden rounded-sm glow-gold">
+              <div className="w-64 h-80 border border-primary/5 mb-8 relative overflow-hidden rounded-sm glow-blue">
                 <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
                 <div className="w-full h-full bg-surface-container flex items-center justify-center relative">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-deep-obsidian/90 z-10"></div>
@@ -1296,18 +1345,17 @@ function ContactView() {
 
   return (
     <div className="fade-in pt-28">
-      {/* Hero */}
-      <section className="relative min-h-[45vh] flex flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img src="/images/blueprint.png" alt="" className="w-full h-full object-cover opacity-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-deep-obsidian via-deep-obsidian/90 to-deep-obsidian/60"></div>
+      {/* Hero — transparent so 3D rings show through */}
+      <section className="relative min-h-[45vh] flex flex-col justify-end">
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-deep-obsidian/80 via-transparent to-transparent"></div>
         </div>
         <div className="relative z-10 max-w-container-max mx-auto px-6 md:px-margin-desktop pb-16 w-full">
           <div className="flex items-center gap-4 mb-8 reveal-item">
             <div className="w-12 h-px bg-gradient-to-r from-primary/40 to-transparent"></div>
             <span className="font-label-caps text-[10px] tracking-[0.3em] text-primary/50 uppercase">SEC_01 // Inquiries</span>
           </div>
-          <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-gold mb-6">
+          <h1 className="reveal-item reveal-delay-1 font-headline-lg text-[clamp(3rem,8vw,7rem)] leading-[0.9] text-gradient-blue mb-6">
             Contact Us.
           </h1>
           <p className="reveal-item reveal-delay-2 text-[15px] text-on-surface-variant/50 max-w-lg leading-[1.9] font-light">
@@ -1320,13 +1368,13 @@ function ContactView() {
       <div className="max-w-container-max mx-auto px-6 md:px-margin-desktop pb-32 pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Form */}
-          <div className="lg:col-span-7 glass-panel p-8 md:p-12 rounded-sm border border-primary/5 relative z-20 reveal-item glow-gold">
+          <div className="lg:col-span-7 glass-panel p-8 md:p-12 rounded-sm border border-primary/5 relative z-20 reveal-item glow-blue">
             {submitted ? (
               <div className="text-center py-24 fade-in">
                 <span className="material-symbols-outlined text-primary/60 text-6xl mb-6 float-animation block">
                   check_circle
                 </span>
-                <h3 className="font-headline-md text-2xl text-gradient-gold mb-4">Transmission Successful</h3>
+                <h3 className="font-headline-md text-2xl text-gradient-blue mb-4">Transmission Successful</h3>
                 <p className="text-on-surface-variant/50 max-w-md mx-auto leading-relaxed font-light">
                   Your inquiry has been logged. A representative from the chosen department will contact you shortly.
                 </p>
@@ -1415,7 +1463,7 @@ function ContactView() {
           {/* Directory */}
           <div className="lg:col-span-5 space-y-12 relative z-20">
             <div className="space-y-6 reveal-item">
-              <h3 className="font-headline-md text-2xl text-gradient-gold">District Directory</h3>
+              <h3 className="font-headline-md text-2xl text-gradient-blue">District Directory</h3>
               <div className="h-px bg-gradient-to-r from-primary/10 to-transparent w-full"></div>
               
               <div className="space-y-8">
