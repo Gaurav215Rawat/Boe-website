@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import Team3DCarousel from '../components/Team3DCarousel';
 import RoadmapJourney from '../components/RoadmapJourney';
 
+// Helper to guarantee literal 'X+ Years Experience' formatting across all staff members
+function formatExperience() {
+  return 'X+ Years Experience';
+}
+
 export default function AboutView({ staff = [], onOpenEstimator }) {
   const [teamDisplayMode, setTeamDisplayMode] = useState('3d'); // '3d' | 'grid'
   const [selectedStaffIndex, setSelectedStaffIndex] = useState(0);
@@ -465,7 +470,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
                         <div className="absolute inset-0 bg-gradient-to-t from-[#08184E]/80 via-transparent to-transparent" />
                         <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between">
                           <span className="font-sans text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-lg glass-badge text-[#08184E] font-bold shadow-xs">
-                            {member.experience}
+                            {formatExperience(member.experience)}
                           </span>
                           <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-sans font-bold text-gold-300 bg-[#08184E]/80 px-2 py-0.5 rounded-full border border-gold-400/40">
                             View in 3D
@@ -476,7 +481,9 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
                       <h3 className="font-serif text-lg font-bold text-[#08184E] group-hover:text-gold-700 transition-colors">
                         {member.name}
                       </h3>
-                      <div className="text-xs text-gold-700 font-semibold mt-0.5 font-sans">{member.role}</div>
+                      <div className="text-xs text-gold-700 font-semibold mt-0.5 font-sans">
+                        {formatExperience(member.experience)}
+                      </div>
                       <div className="text-[11px] font-sans text-[#6E665B] mt-1">{member.qualification}</div>
 
                       <p className="text-xs text-[#4A443C] font-sans leading-relaxed mt-3 pt-3 border-t border-[#EDE5D5]">

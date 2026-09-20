@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
+// Helper to guarantee literal 'X+ Years Experience' formatting across all staff members
+function formatExperience() {
+  return 'X+ Years Experience';
+}
+
 export default function Team3DCarousel({ teamMembers = [], initialIndex = 0 }) {
   const [activeIndex, setActiveIndex] = useState(initialIndex);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -320,25 +325,23 @@ export default function Team3DCarousel({ teamMembers = [], initialIndex = 0 }) {
                   {/* Atmospheric Vignette Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#08184E]/90 via-black/20 to-transparent pointer-events-none" />
 
-                  {/* Badge on Card */}
-                  <div className="absolute top-3 left-3 right-3 flex justify-between items-center pointer-events-none">
-                    <span className="font-sans text-[9px] sm:text-[9.5px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-md text-white font-bold border border-white/20 truncate max-w-full">
-                      {member.experience || 'Specialist'}
-                    </span>
-                    {!isCurrent && (
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-sans font-bold text-gold-300 bg-[#08184E]/80 px-2 py-0.5 rounded-full border border-gold-400/40">
+                  {/* Card Top: Subtle interactive hover click indicator */}
+                  {!isCurrent && (
+                    <div className="absolute top-3 right-3 pointer-events-none">
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-sans font-bold text-gold-300 bg-[#08184E]/90 px-2.5 py-0.5 rounded-full border border-gold-400/40 shadow-sm">
                         Click
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
 
-                  {/* Bottom Name Preview on Card */}
+                  {/* Bottom Name & Experience on Card (Designation hidden, X+ Experience shown) */}
                   <div className="absolute bottom-3 left-3.5 right-3.5 text-white pointer-events-none">
                     <div className="font-serif text-sm sm:text-base md:text-lg font-bold truncate leading-tight drop-shadow-md group-hover:text-gold-200 transition-colors">
                       {member.name}
                     </div>
-                    <div className="font-sans text-[10px] sm:text-[11px] text-gold-300 font-medium truncate mt-0.5">
-                      {member.role}
+                    <div className="font-sans text-[10.5px] sm:text-[11px] text-gold-300 font-semibold truncate mt-1 flex items-center gap-1.5 drop-shadow-sm">
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold-400 shrink-0" />
+                      <span>{formatExperience(member.experience)}</span>
                     </div>
                   </div>
                 </div>
@@ -356,20 +359,21 @@ export default function Team3DCarousel({ teamMembers = [], initialIndex = 0 }) {
           {/* Top gold line accent */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-1 bg-gradient-to-r from-transparent via-gold-500 to-transparent rounded-full" />
 
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-badge font-sans text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-gold-700 shadow-xs transition-all duration-300">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#08184E] animate-pulse" />
-            <span>{currentMember.role}</span>
+          {/* Top Pill Badge: Shows X+ Years Experience (Designation hidden) */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-badge font-sans text-[10.5px] sm:text-[11px] font-bold tracking-widest uppercase text-gold-700 shadow-xs transition-all duration-300">
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-600 animate-pulse" />
+            <span>{formatExperience(currentMember?.experience).toUpperCase()}</span>
           </div>
 
           <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E] tracking-tight transition-all duration-300">
             {currentMember.name}
           </h3>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-sans text-[#6E665B] transition-all duration-300">
-            <span className="font-semibold text-[#08184E]">{currentMember.qualification}</span>
-            <span>•</span>
-            <span className="text-gold-700 font-bold">{currentMember.experience}</span>
-          </div>
+          {currentMember.qualification && (
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-sans text-[#4A443C] font-medium transition-all duration-300">
+              <span>{currentMember.qualification}</span>
+            </div>
+          )}
 
           <p className="text-xs sm:text-sm text-[#4A443C] font-sans font-normal leading-relaxed max-w-xl mx-auto pt-3 border-t border-[#EDE5D5] transition-all duration-300">
             {currentMember.bio}

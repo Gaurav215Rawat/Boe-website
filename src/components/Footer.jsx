@@ -129,26 +129,16 @@ export default function Footer({
             </ul>
           </div>
 
-          {/* Regional Offices */}
+          {/* Headquarters */}
           <div className="md:col-span-2 space-y-4">
             <h4 className="font-mono text-xs uppercase tracking-[0.2em] text-gold-700 font-bold">
-              Regional Offices
+              Headquarters
             </h4>
             <ul className="space-y-2.5 text-xs font-normal text-steel-600">
               <li>
                 <strong className="text-[#1A1815] block font-semibold">Dubai Headquarters</strong>
-                <span>Opal Tower, Business Bay, Dubai</span>
-                <span className="block font-mono text-[10px] text-steel-500 mt-0.5">+971 4 456 7890</span>
-              </li>
-              <li>
-                <strong className="text-[#1A1815] block font-semibold">Muscat Hub</strong>
-                <span>Shatti Al Qurum, Muscat, Oman</span>
-                <span className="block font-mono text-[10px] text-steel-500 mt-0.5">+968 24 601 234</span>
-              </li>
-              <li>
-                <strong className="text-[#1A1815] block font-semibold">India Design Center</strong>
-                <span>Sector 62, Noida, Delhi NCR</span>
-                <span className="block font-mono text-[10px] text-steel-500 mt-0.5">+91 120 456 7890</span>
+                <span>Detroit Rd - Al Hebiah First, Dubai Motor City, Dubai, UAE</span>
+                <span className="block font-mono text-[10px] text-steel-500 mt-1 font-semibold">+971 4 457 2075</span>
               </li>
             </ul>
           </div>

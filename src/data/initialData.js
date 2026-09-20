@@ -14,23 +14,11 @@ export const initialData = {
     },
     "offices": [
       {
-        "city": "Dubai (Headquarters)",
-        "address": "Office 1402, Opal Tower, Business Bay, Dubai, UAE",
-        "phone": "+971 4 456 7890",
+        "city": "Dubai (Global Headquarters)",
+        "address": "Detroit Rd - Al Hebiah First - Dubai Motor City - Dubai - United Arab Emirates",
+        "phone": "+971 4 457 2075",
         "email": "dubai@bestconsult.com",
-        "pobox": "P.O. Box 118492, Dubai, UAE"
-      },
-      {
-        "city": "Muscat, Oman",
-        "address": "Way 3015, Shatti Al Qurum, Muscat, Sultanate of Oman",
-        "phone": "+968 24 601 234",
-        "email": "oman@bestconsult.com"
-      },
-      {
-        "city": "India (Engineering Center)",
-        "address": "Tower B, Sector 62, Noida, Delhi NCR, India",
-        "phone": "+91 120 456 7890",
-        "email": "india@bestconsult.com"
+        "pobox": "Dubai, UAE"
       }
     ]
   },
@@ -197,7 +185,7 @@ export const initialData = {
       "image": "/core_data/BEST/Staff photos/4. Thomas chandy.png"
     },
     {
-      "id": "staff-7",
+      "id": "staff-7b",
       "name": "Vasu Malik",
       "role": "Principal Structural Engineer",
       "experience": "16+ Years Experience",

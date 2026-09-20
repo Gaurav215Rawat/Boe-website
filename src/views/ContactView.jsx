@@ -56,32 +56,12 @@ export default function ContactView({ onOpenEstimator }) {
     {
       city: 'Dubai (Global Headquarters)',
       badge: 'HEADQUARTERS',
-      address: 'Office 1402, Opal Tower, Business Bay, Dubai, UAE',
-      phone: '+971 4 456 7890',
+      address: 'Detroit Rd - Al Hebiah First - Dubai Motor City - Dubai - United Arab Emirates',
+      phone: '+971 4 457 2075',
       email: 'dubai@bestengineers.ae',
       hours: 'Mon – Fri: 08:30 AM – 06:00 PM GST',
-      pobox: 'P.O. Box 118492, Dubai, UAE',
-      mapUrl: 'https://maps.google.com/?q=Opal+Tower+Business+Bay+Dubai',
-    },
-    {
-      city: 'Muscat, Sultanate of Oman',
-      badge: 'REGIONAL HUB',
-      address: 'Way 3015, Shatti Al Qurum, Muscat, Sultanate of Oman',
-      phone: '+968 24 601 234',
-      email: 'oman@bestengineers.ae',
-      hours: 'Sun – Thu: 08:00 AM – 05:30 PM GST',
-      pobox: 'P.O. Box 452, Muscat, Oman',
-      mapUrl: 'https://maps.google.com/?q=Shatti+Al+Qurum+Muscat+Oman',
-    },
-    {
-      city: 'India (Engineering Center)',
-      badge: 'DESIGN CENTER',
-      address: 'Tower B, Sector 62, Noida, Delhi NCR, India',
-      phone: '+91 120 456 7890',
-      email: 'india@bestengineers.ae',
-      hours: 'Mon – Fri: 09:00 AM – 06:30 PM IST',
-      pobox: 'Noida 201309, India',
-      mapUrl: 'https://maps.google.com/?q=Sector+62+Noida+India',
+      pobox: 'Dubai, UAE',
+      mapUrl: 'https://maps.google.com/?q=Detroit+Rd+Dubai+Motor+City+Dubai+United+Arab+Emirates',
     },
   ];
 
@@ -97,7 +77,7 @@ export default function ContactView({ onOpenEstimator }) {
       {/* Header */}
       <div className="mb-14 space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-badge text-[11px] font-sans font-bold tracking-wider uppercase text-[#08184E] shadow-xs">
-          Project Inquiries & Regional Offices
+          Project Inquiries & Global Headquarters
         </div>
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div>
@@ -105,7 +85,7 @@ export default function ContactView({ onOpenEstimator }) {
               Start Your <span className="italic text-gradient-gold">Project Inquiry</span>
             </h1>
             <p className="text-[#4A443C] text-sm sm:text-base max-w-2xl font-sans font-normal mt-2 leading-relaxed">
-              Connect directly with our senior structural directors in Dubai, Muscat, and India for architectural consultancy, structural engineering, value engineering, or authority permitting.
+              Connect directly with our senior structural directors in Dubai for architectural consultancy, structural engineering, value engineering, or authority permitting.
             </p>
           </div>
 
@@ -124,54 +104,63 @@ export default function ContactView({ onOpenEstimator }) {
         </div>
       </div>
 
-      {/* Grid: 3 Office Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      {/* Global Headquarters Office Card */}
+      <div className="max-w-3xl mx-auto mb-16">
         {offices.map((office, idx) => (
           <div
             key={idx}
-            className="p-8 rounded-3xl glass-card shadow-xl hover:border-[#08184E]/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6"
+            className="p-8 sm:p-10 rounded-3xl glass-card shadow-xl hover:border-[#08184E]/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6"
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#08184E] text-white flex items-center justify-center shadow-md">
-                  <span className="material-symbols-outlined text-xl text-gold-300">location_on</span>
+                <div className="w-12 h-12 rounded-2xl bg-[#08184E] text-white flex items-center justify-center shadow-md">
+                  <span className="material-symbols-outlined text-2xl text-gold-300">location_on</span>
                 </div>
-                <span className="font-sans text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full glass-badge text-[#08184E] font-bold shadow-xs">
+                <span className="font-sans text-[10.5px] uppercase tracking-wider px-3.5 py-1 rounded-full glass-badge text-[#08184E] font-bold shadow-xs">
                   {office.badge}
                 </span>
               </div>
 
               <div>
-                <h3 className="font-serif text-xl font-bold text-[#08184E]">{office.city}</h3>
-                <p className="text-xs text-[#4A443C] font-sans mt-1.5 leading-relaxed">
+                <h3 className="font-serif text-2xl font-bold text-[#08184E]">{office.city}</h3>
+                <p className="text-sm text-[#4A443C] font-sans mt-2 leading-relaxed font-medium">
                   {office.address}
                 </p>
-                {office.pobox && (
-                  <p className="text-[11px] font-sans text-[#6E665B] mt-1">{office.pobox}</p>
-                )}
               </div>
 
-              <div className="space-y-2 pt-2 text-xs font-sans border-t border-white/60">
-                <div className="flex items-center gap-2 text-[#4A443C]">
-                  <span className="material-symbols-outlined text-sm text-gold-600">call</span>
-                  <a href={`tel:${office.phone}`} className="hover:text-[#08184E] font-semibold transition-colors">
-                    {office.phone}
-                  </a>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs font-sans border-t border-white/60">
+                <div className="space-y-1">
+                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Telephone</span>
+                  <div className="flex items-center gap-2 text-[#4A443C]">
+                    <span className="material-symbols-outlined text-base text-gold-600">call</span>
+                    <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="hover:text-[#08184E] font-semibold transition-colors">
+                      {office.phone}
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-[#4A443C]">
-                  <span className="material-symbols-outlined text-sm text-gold-600">mail</span>
-                  <a href={`mailto:${office.email}`} className="hover:text-[#08184E] font-semibold transition-colors">
-                    {office.email}
-                  </a>
+
+                <div className="space-y-1">
+                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Email Inquiries</span>
+                  <div className="flex items-center gap-2 text-[#4A443C]">
+                    <span className="material-symbols-outlined text-base text-gold-600">mail</span>
+                    <a href={`mailto:${office.email}`} className="hover:text-[#08184E] font-semibold transition-colors">
+                      {office.email}
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 text-[#6E665B] text-[11px]">
-                  <span className="material-symbols-outlined text-sm text-[#6E665B]">schedule</span>
-                  <span>{office.hours}</span>
+
+                <div className="space-y-1">
+                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Working Hours</span>
+                  <div className="flex items-center gap-2 text-[#6E665B]">
+                    <span className="material-symbols-outlined text-base text-[#6E665B]">schedule</span>
+                    <span>{office.hours}</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-white/60">
+            <div className="pt-4 border-t border-white/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <span className="text-xs text-[#6E665B] font-sans">Official Bureau of Engineering Studies (BEST) Headquarters</span>
               <a
                 href={office.mapUrl}
                 target="_blank"
@@ -383,7 +372,7 @@ export default function ContactView({ onOpenEstimator }) {
 
             <div className="space-y-3">
               <a
-                href="https://wa.me/97144567890?text=Hello%20BEST%20Consulting%20Engineers,%20I%20would%20like%20to%20discuss%20an%20engineering%20project."
+                href="https://wa.me/97144572075?text=Hello%20BEST%20Consulting%20Engineers,%20I%20would%20like%20to%20discuss%20an%20engineering%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 hover:bg-emerald-500/25 text-[#08184E] flex items-center justify-between transition-all group backdrop-blur-md"
@@ -392,7 +381,7 @@ export default function ContactView({ onOpenEstimator }) {
                   <span className="material-symbols-outlined text-2xl text-emerald-700">chat</span>
                   <div>
                     <div className="text-xs font-bold font-sans text-emerald-900">WhatsApp Live Chat</div>
-                    <div className="text-[10px] text-[#4A443C] font-sans">+971 4 456 7890</div>
+                    <div className="text-[10px] text-[#4A443C] font-sans">+971 4 457 2075</div>
                   </div>
                 </div>
                 <span className="material-symbols-outlined text-sm text-emerald-700 group-hover:translate-x-1 transition-transform">
