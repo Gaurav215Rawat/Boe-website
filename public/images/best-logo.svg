@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="100%" height="100%">
+  <!-- Background Badge: Official Royal Navy -->
+  <rect x="0" y="0" width="140" height="120" rx="14" fill="#08184E"/>
+  
+  <!-- BEST Bold White Typography -->
+  <text x="70" y="86" font-family="'Bebas Neue', 'Montserrat', Impact, sans-serif" font-size="82" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">BEST</text>
+  
+  <!-- Subtext: Bureau of Engineering Studies -->
+  <text x="165" y="52" font-family="'Plus Jakarta Sans', 'Montserrat', sans-serif" font-size="20" font-weight="700" fill="#08184E" letter-spacing="1.5">BUREAU OF ENGINEERING STUDIES</text>
+  <text x="165" y="82" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="600" fill="#7E6123" letter-spacing="4">CONSULTING ENGINEERS</text>
+</svg>
