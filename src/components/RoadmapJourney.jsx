@@ -40,10 +40,10 @@ export default function RoadmapJourney({ milestones = [] }) {
     },
     {
       year: '2020',
-      title: 'G+Unlimited Dubai Licensure',
-      badge: 'G+UNLIMITED',
-      desc: 'Awarded Dubai Municipality G+Unlimited structural design license, enabling unlimited height tower and mega-structure engineering.',
-      metric: 'Unlimited Heights · High-Rise Seismic Authority',
+      title: 'G+4 Dubai Licensure',
+      badge: 'G+4 LICENSED',
+      desc: 'Awarded Dubai Municipality G+4 structural design license, enabling comprehensive residential, commercial, and industrial structural engineering.',
+      metric: 'G+4 Floors · Comprehensive Structural Authority',
       icon: 'apartment',
       color: '#D97706', // Architectural Amber Gold
       lightColor: '#FEF3C7',

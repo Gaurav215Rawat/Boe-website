@@ -11,7 +11,7 @@ export default function ServicesView({ services = [], onOpenEstimator }) {
       <div className="mb-14 space-y-4">
         <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass-badge text-[11px] font-sans font-bold tracking-wider uppercase text-[#08184E] shadow-xs">
           <span className="w-2 h-2 rounded-full bg-[#08184E] animate-pulse"></span>
-          Disciplines & Expertise • G+Unlimited Dubai Licensed
+          Disciplines & Expertise • G+4 Dubai Licensed
         </div>
         <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-[#08184E] tracking-tight">
           Comprehensive <span className="italic text-gradient-gold">Engineering Services</span>

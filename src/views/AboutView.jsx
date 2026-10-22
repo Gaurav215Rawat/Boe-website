@@ -31,14 +31,14 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
     },
     {
       year: '2020',
-      title: 'G+Unlimited Dubai Licensure',
-      desc: 'Awarded Dubai Municipality G+Unlimited structural design license, enabling unlimited height tower and mega-structure engineering.',
-      badge: 'G+UNLIMITED',
+      title: 'G+4 Dubai Licensure',
+      desc: 'Awarded Dubai Municipality G+4 structural design license, enabling comprehensive residential, commercial, and industrial structural engineering.',
+      badge: 'G+4 LICENSED',
     },
     {
       year: '2024+',
       title: 'Digital Engineering & BIM Level 3',
-      desc: 'Delivering 40M+ sq.ft across 1,000+ completed developments with automated FEA modeling, 4D BIM digital twins, and advanced value engineering.',
+      desc: 'Delivering 40M+ sq.ft across 5000+ completed developments with automated FEA modeling, 4D BIM digital twins, and advanced value engineering.',
       badge: 'INNOVATION',
     },
   ];
@@ -90,7 +90,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
         <div className="relative z-10 max-w-xl lg:max-w-2xl p-6 sm:p-8 md:p-10 rounded-3xl glass-card-hero space-y-4 sm:space-y-5">
           <div className="inline-flex items-center gap-2 font-sans text-[10.5px] sm:text-[11px] tracking-wider uppercase text-[#08184E] glass-badge px-3.5 py-1.5 rounded-full font-bold shadow-xs">
             <span className="w-1.5 h-1.5 rounded-full bg-[#08184E] animate-pulse" />
-            <span>ESTABLISHED 2010 · G+UNLIMITED LICENSED</span>
+            <span>ESTABLISHED 2010 · G+4 LICENSED</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-[#08184E] tracking-tight leading-[1.14]">
@@ -99,7 +99,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
           </h1>
 
           <p className="text-[#1A1815] text-xs sm:text-sm md:text-[15px] font-sans font-normal leading-relaxed">
-            Bureau of Engineering Studies (BEST) is a premier structural engineering and architectural consultancy headquartered in Dubai, UAE. Over 15+ years, our team of seasoned engineers has designed, audited, and delivered more than 1,000 landmark developments across the Middle East, Africa, and Asia.
+            Bureau of Engineering Studies Consulting Engineers L.L.C is a premier structural engineering and architectural consultancy headquartered in Dubai, UAE. Over 15+ years, our team of seasoned engineers has designed, audited, and delivered more than 5000 landmark developments across UAE, India & GCC countries.
           </p>
 
           <div className="pt-2 flex flex-wrap gap-4">
@@ -116,7 +116,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
         {/* Floating Quick Stats (Frosted Glass Sub-Bar) */}
         <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-8 p-5 sm:p-6 rounded-2xl glass-card-bar max-w-4xl">
           <div className="space-y-0.5">
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">1000+</div>
+            <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">5000+</div>
             <div className="text-[10px] sm:text-[11px] font-sans text-[#4A443C] uppercase tracking-wider font-bold">Projects Engineered</div>
           </div>
           <div className="space-y-0.5">
@@ -128,7 +128,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
             <div className="text-[10px] sm:text-[11px] font-sans text-[#4A443C] uppercase tracking-wider font-bold">Sq. Ft Built-Up Area</div>
           </div>
           <div className="space-y-0.5">
-            <div className="font-serif text-2xl sm:text-3xl font-bold text-gold-700">G+Unltd</div>
+            <div className="font-serif text-2xl sm:text-3xl font-bold text-gold-700">G+4 Licence</div>
             <div className="text-[10px] sm:text-[11px] font-sans text-[#4A443C] uppercase tracking-wider font-bold">Dubai Authority License</div>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
             Founding <span className="italic text-gradient-gold">Partners & Leadership</span>
           </h2>
           <p className="text-[#6E665B] text-xs sm:text-sm max-w-xl font-sans">
-            Over a century of collective structural leadership, G+Unlimited Dubai Municipality licenses, and complex project execution across the GCC.
+            Over a century of collective structural leadership, G+4 Dubai Municipality licenses, and complex project execution across the GCC.
           </p>
         </div>
 
@@ -226,7 +226,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-gold-600 font-bold">◆</span>
-                  <span>Masters in Structural Engineering from <strong>IIT Kanpur</strong>, India. Registered G+Unlimited Structural Consultant.</span>
+                  <span>Masters in Structural Engineering from <strong>IIT Kanpur</strong>, India. Registered G+4 Structural Consultant.</span>
                 </div>
               </div>
             </div>
@@ -512,15 +512,15 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
           LICENSURE & STATUTORY COMPLIANCE
         </div>
         <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E] tracking-tight">
-          Fully Licensed for Unlimited Structural Heights in Dubai & the GCC
+          Fully Licensed for G+4 Structural Engineering in Dubai & the GCC
         </h2>
         <p className="text-xs sm:text-sm text-[#4A443C] max-w-3xl mx-auto font-sans leading-relaxed">
-          Registered and approved with Dubai Municipality (G+Unlimited Height Category), Trakhees (Port, Customs and Free Zone Corporation), Dubai Development Authority (DDA), Dubai South (DWC Aviation), and Civil Defence Fire Life Safety Authorities.
+          Registered and approved with Dubai Municipality (G+4 Category), Trakhees (Port, Customs and Free Zone Corporation), Dubai Development Authority (DDA), Dubai South (DWC Aviation), and Civil Defence Fire Life Safety Authorities.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3 pt-4 font-sans text-xs text-[#08184E]">
           <span className="px-4 py-2 rounded-xl glass-panel-subtle font-bold shadow-xs">
-            ✓ Dubai Municipality G+Unlimited
+            ✓ Dubai Municipality G+4 Licence
           </span>
           <span className="px-4 py-2 rounded-xl glass-panel-subtle font-bold shadow-xs">
             ✓ Trakhees Structural Consultant

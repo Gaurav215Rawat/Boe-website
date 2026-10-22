@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 // Animated numeric counter with cubic easing
-function AnimatedCounter({ end, prefix = '', suffix = '', duration = 1600 }) {
+function AnimatedCounter({ end, prefix = '', suffix = '', duration = 1600, useLocale = false }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const hasAnimated = useRef(false);
@@ -29,7 +29,7 @@ function AnimatedCounter({ end, prefix = '', suffix = '', duration = 1600 }) {
     return () => observer.disconnect();
   }, [end, duration]);
 
-  return <span ref={ref}>{prefix}{count.toLocaleString()}{suffix}</span>;
+  return <span ref={ref}>{prefix}{useLocale ? count.toLocaleString() : count}{suffix}</span>;
 }
 
 export default function HomeView({
@@ -165,7 +165,7 @@ export default function HomeView({
 
               {/* Compact Subtext */}
               <p className="text-[#1A1815] text-xs sm:text-sm md:text-[15px] max-w-lg font-normal leading-relaxed">
-                Specialized in high-rise towers, large-span aviation hangars, luxury villas, and complex structural engineering with 1,000+ delivered projects across the Middle East.
+                Specialized in high-rise towers, large-span aviation hangars, luxury villas, and complex structural engineering with 5000+ delivered projects across UAE, India & GCC countries.
               </p>
 
               {/* Compact Action Buttons */}
@@ -250,7 +250,7 @@ export default function HomeView({
           <div className="py-3.5 px-6 sm:px-8 rounded-2xl glass-card-bar grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center">
             <div className="space-y-0.5">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">
-                <AnimatedCounter end={1000} suffix="+" />
+                <AnimatedCounter end={5000} suffix="+" />
               </div>
               <div className="font-sans text-[10px] uppercase tracking-wider text-[#4A443C] font-bold">
                 Delivered Projects
@@ -277,16 +277,16 @@ export default function HomeView({
 
             <div className="space-y-0.5">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">
-                <AnimatedCounter end={6} suffix=" Countries" />
+                GCC & India
               </div>
               <div className="font-sans text-[10px] uppercase tracking-wider text-[#4A443C] font-bold">
-                UAE, Oman, Qatar, India
+                UAE, India & GCC countries
               </div>
             </div>
 
             <div className="space-y-0.5 col-span-2 md:col-span-1">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-gold-700">
-                G+Unlimited
+                G+4 Licence
               </div>
               <div className="font-sans text-[10px] uppercase tracking-wider text-[#4A443C] font-bold">
                 Dubai Authority License

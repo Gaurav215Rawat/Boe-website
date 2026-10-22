@@ -218,7 +218,7 @@ Contact: ${clientContact || 'N/A'}`;
               </div>
               <div className="flex justify-between">
                 <span className="text-steel-600">Authority Jurisdiction:</span>
-                <span className="text-emerald-700 font-bold">G+Unlimited Registered</span>
+                <span className="text-emerald-700 font-bold">G+4 Registered</span>
               </div>
             </div>
 

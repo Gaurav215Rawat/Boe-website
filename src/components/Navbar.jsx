@@ -174,7 +174,7 @@ export default function Navbar({
 
           <div className="border-t border-[#E2D9C5] pt-6 text-xs text-steel-500 font-mono space-y-1">
             <p>Opal Tower, Business Bay, Dubai, UAE</p>
-            <p className="text-gold-700 font-semibold">1000+ Landmark Projects Engineered</p>
+            <p className="text-gold-700 font-semibold">5000+ Landmark Projects Engineered</p>
           </div>
         </div>
       )}

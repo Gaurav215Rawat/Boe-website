@@ -137,8 +137,15 @@ export default function Footer({
             <ul className="space-y-2.5 text-xs font-normal text-steel-600">
               <li>
                 <strong className="text-[#1A1815] block font-semibold">Dubai Headquarters</strong>
-                <span>Detroit Rd - Al Hebiah First, Dubai Motor City, Dubai, UAE</span>
-                <span className="block font-mono text-[10px] text-steel-500 mt-1 font-semibold">+971 4 457 2075</span>
+                <span>101 Detroit House, Motor City, Dubai, UAE</span>
+                <span className="block font-mono text-[10px] text-steel-500 mt-0.5">P.O. Box: 123606</span>
+                <span className="block font-mono text-[10px] text-steel-500 mt-1 font-semibold">
+                  Tel: <a href="tel:+97144572075" className="hover:text-gold-700">+971 4 457 2075</a> &amp; <a href="tel:+97145148067" className="hover:text-gold-700">+971 4 514 8067</a>
+                </span>
+                <span className="block font-mono text-[10px] text-steel-500 mt-0.5 font-semibold">Fax: +971 4 457 2076</span>
+                <a href="mailto:info@bureauofengineering.com" className="block font-mono text-[10px] text-gold-700 hover:text-gold-800 mt-0.5 transition-colors">
+                  info@bureauofengineering.com
+                </a>
               </li>
             </ul>
           </div>
@@ -199,9 +206,9 @@ export default function Footer({
 
         {/* Bottom Copyright & Compliance */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-steel-500">
-          <p>© {new Date().getFullYear()} Bureau of Engineering Studies (BEST) Consulting Engineers LLC. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bureau of Engineering Studies Consulting Engineers L.L.C. All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-semibold">
-            <span className="text-gold-700">Dubai Municipality G+Unlimited</span>
+            <span className="text-gold-700">Dubai Municipality G+4 Licence</span>
             <span>·</span>
             <span>Trakhees Certified</span>
             <span>·</span>

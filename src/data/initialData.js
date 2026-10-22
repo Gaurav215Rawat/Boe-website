@@ -1,12 +1,12 @@
 export const initialData = {
   "company": {
-    "name": "Bureau of Engineering Studies (BEST)",
-    "legalName": "Bureau of Engineering Studies Consulting Engineers LLC",
+    "name": "Bureau of Engineering Studies Consulting Engineers L.L.C",
+    "legalName": "Bureau of Engineering Studies Consulting Engineers L.L.C",
     "shortName": "BEST",
     "tagline": "Engineering Landmark Spaces · Inspiring Tomorrow",
     "founded": "2010",
     "stats": {
-      "projects": "1000+",
+      "projects": "5000+",
       "experienceYears": "15+",
       "sqftEngineered": "40M+",
       "countries": "6+",
@@ -15,10 +15,12 @@ export const initialData = {
     "offices": [
       {
         "city": "Dubai (Global Headquarters)",
-        "address": "Detroit Rd - Al Hebiah First - Dubai Motor City - Dubai - United Arab Emirates",
+        "address": "101 Detroit House, Motor City, Dubai, United Arab Emirates",
         "phone": "+971 4 457 2075",
-        "email": "dubai@bestconsult.com",
-        "pobox": "Dubai, UAE"
+        "phoneSecondary": "+971 4 514 8067",
+        "fax": "+971 4 457 2076",
+        "email": "info@bureauofengineering.com",
+        "pobox": "123606"
       }
     ]
   },

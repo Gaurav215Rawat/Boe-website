@@ -32,18 +32,23 @@ export default function ContactView({ onOpenEstimator }) {
       };
       setDubaiTime(new Intl.DateTimeFormat('en-US', options).format(now));
 
-      const hourOptions = { timeZone: 'Asia/Dubai', hour12: false, hour: 'numeric', weekday: 'short' };
+      const hourOptions = { timeZone: 'Asia/Dubai', hour12: false, hour: 'numeric', minute: 'numeric', weekday: 'short' };
       const formatter = new Intl.DateTimeFormat('en-US', hourOptions);
       const parts = formatter.formatToParts(now);
       const hourPart = parts.find((p) => p.type === 'hour');
+      const minutePart = parts.find((p) => p.type === 'minute');
       const weekdayPart = parts.find((p) => p.type === 'weekday');
 
       const hour = hourPart ? parseInt(hourPart.value, 10) : 12;
+      const minute = minutePart ? parseInt(minutePart.value, 10) : 0;
       const weekday = weekdayPart ? weekdayPart.value : 'Mon';
 
-      // Monday to Friday 8:30 AM to 6:00 PM GST
+      // Monday to Friday 8:30 AM (510 min) to 6:30 PM (1110 min) GST
       const isWeekday = !['Sat', 'Sun'].includes(weekday);
-      const isWorkHours = hour >= 8 && hour < 18;
+      const currentMinutes = hour * 60 + minute;
+      const startMinutes = 8 * 60 + 30; // 08:30 AM
+      const endMinutes = 18 * 60 + 30;  // 06:30 PM
+      const isWorkHours = currentMinutes >= startMinutes && currentMinutes < endMinutes;
       setIsOfficeOpen(isWeekday && isWorkHours);
     };
 
@@ -56,12 +61,14 @@ export default function ContactView({ onOpenEstimator }) {
     {
       city: 'Dubai (Global Headquarters)',
       badge: 'HEADQUARTERS',
-      address: 'Detroit Rd - Al Hebiah First - Dubai Motor City - Dubai - United Arab Emirates',
+      address: '101 Detroit House, Motor City, Dubai, United Arab Emirates',
+      pobox: '123606',
       phone: '+971 4 457 2075',
-      email: 'dubai@bestengineers.ae',
-      hours: 'Mon – Fri: 08:30 AM – 06:00 PM GST',
-      pobox: 'Dubai, UAE',
-      mapUrl: 'https://maps.google.com/?q=Detroit+Rd+Dubai+Motor+City+Dubai+United+Arab+Emirates',
+      phoneSecondary: '+971 4 514 8067',
+      fax: '+971 4 457 2076',
+      email: 'info@bureauofengineering.com',
+      hours: 'Mon – Fri: 08:30 AM – 06:30 PM GST',
+      mapUrl: 'https://maps.google.com/?q=Detroit+House+Motor+City+Dubai+United+Arab+Emirates',
     },
   ];
 
@@ -105,67 +112,149 @@ export default function ContactView({ onOpenEstimator }) {
       </div>
 
       {/* Global Headquarters Office Card */}
-      <div className="max-w-3xl mx-auto mb-16">
+      <div className="max-w-4xl mx-auto mb-16">
         {offices.map((office, idx) => (
           <div
             key={idx}
-            className="p-8 sm:p-10 rounded-3xl glass-card shadow-xl hover:border-[#08184E]/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6"
+            className="p-7 sm:p-9 rounded-3xl glass-card shadow-xl hover:border-[#08184E]/40 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6"
           >
-            <div className="space-y-5">
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-[#08184E] text-white flex items-center justify-center shadow-md">
-                  <span className="material-symbols-outlined text-2xl text-gold-300">location_on</span>
+            <div className="space-y-6">
+              {/* Header inside card */}
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-[#08184E] text-white flex items-center justify-center shadow-md shrink-0">
+                    <span className="material-symbols-outlined text-2xl text-gold-300">location_on</span>
+                  </div>
+                  <span className="font-sans text-[11px] uppercase tracking-wider px-3.5 py-1 rounded-full glass-badge text-[#08184E] font-bold shadow-xs">
+                    {office.badge}
+                  </span>
                 </div>
-                <span className="font-sans text-[10.5px] uppercase tracking-wider px-3.5 py-1 rounded-full glass-badge text-[#08184E] font-bold shadow-xs">
-                  {office.badge}
-                </span>
+
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#08184E]/10 font-sans text-xs">
+                  <span className={`w-2.5 h-2.5 rounded-full ${isOfficeOpen ? 'bg-emerald-500 animate-pulse' : 'bg-gold-500'}`} />
+                  <span className="text-[#08184E] font-semibold">
+                    {isOfficeOpen ? 'Office Open Now' : 'Closed • Reopens 08:30 AM GST'}
+                  </span>
+                </div>
               </div>
 
+              {/* Office Title & Address */}
               <div>
-                <h3 className="font-serif text-2xl font-bold text-[#08184E]">{office.city}</h3>
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">{office.city}</h3>
                 <p className="text-sm text-[#4A443C] font-sans mt-2 leading-relaxed font-medium">
                   {office.address}
                 </p>
+                {office.pobox && (
+                  <p className="text-xs text-[#6E665B] font-sans mt-1 font-semibold">
+                    P.O. Box: {office.pobox} • Dubai, United Arab Emirates
+                  </p>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-xs font-sans border-t border-white/60">
-                <div className="space-y-1">
-                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Telephone</span>
-                  <div className="flex items-center gap-2 text-[#4A443C]">
-                    <span className="material-symbols-outlined text-base text-gold-600">call</span>
-                    <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="hover:text-[#08184E] font-semibold transition-colors">
-                      {office.phone}
-                    </a>
+              {/* Modern 2x2 Grid: Zero overlap, generous width, crystal clear hierarchy */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 font-sans">
+                {/* Tile 1: Telephone */}
+                <div className="p-4 rounded-2xl bg-white/70 border border-[#08184E]/10 shadow-2xs backdrop-blur-xs flex items-start gap-3.5 hover:bg-white/90 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#08184E]/5 text-[#08184E] flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-xl text-gold-600">call</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block mb-1">
+                      Direct Telephone
+                    </span>
+                    <div className="flex flex-col gap-1 text-xs text-[#1A1815]">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="hover:text-gold-700 font-semibold transition-colors">
+                          {office.phone}
+                        </a>
+                        {office.phoneSecondary && (
+                          <>
+                            <span className="text-[#6E665B] text-[11px] font-bold">&</span>
+                            <a href={`tel:${office.phoneSecondary.replace(/\s+/g, '')}`} className="hover:text-gold-700 font-semibold transition-colors">
+                              {office.phoneSecondary}
+                            </a>
+                          </>
+                        )}
+                      </div>
+                      <span className="text-[11px] text-[#6E665B]">
+                        Central engineering switchboard
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Email Inquiries</span>
-                  <div className="flex items-center gap-2 text-[#4A443C]">
-                    <span className="material-symbols-outlined text-base text-gold-600">mail</span>
-                    <a href={`mailto:${office.email}`} className="hover:text-[#08184E] font-semibold transition-colors">
+                {/* Tile 2: Fax */}
+                <div className="p-4 rounded-2xl bg-white/70 border border-[#08184E]/10 shadow-2xs backdrop-blur-xs flex items-start gap-3.5 hover:bg-white/90 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#08184E]/5 text-[#08184E] flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-xl text-gold-600">print</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block mb-1">
+                      Facsimile (Fax)
+                    </span>
+                    <a
+                      href={`tel:${office.fax.replace(/\s+/g, '')}`}
+                      className="text-xs font-semibold text-[#1A1815] hover:text-gold-700 transition-colors block"
+                    >
+                      {office.fax}
+                    </a>
+                    <span className="text-[11px] text-[#6E665B] block mt-0.5">
+                      Direct corporate transmission
+                    </span>
+                  </div>
+                </div>
+
+                {/* Tile 3: Email Inquiries */}
+                <div className="p-4 rounded-2xl bg-white/70 border border-[#08184E]/10 shadow-2xs backdrop-blur-xs flex items-start gap-3.5 hover:bg-white/90 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#08184E]/5 text-[#08184E] flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-xl text-gold-600">mail</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block mb-1">
+                      Email Inquiries
+                    </span>
+                    <a
+                      href={`mailto:${office.email}`}
+                      className="text-xs font-semibold text-[#08184E] hover:text-gold-700 transition-colors block break-all"
+                    >
                       {office.email}
                     </a>
+                    <span className="text-[11px] text-[#6E665B] block mt-0.5">
+                      RFP tenders &amp; client consultations
+                    </span>
                   </div>
                 </div>
 
-                <div className="space-y-1">
-                  <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block">Working Hours</span>
-                  <div className="flex items-center gap-2 text-[#6E665B]">
-                    <span className="material-symbols-outlined text-base text-[#6E665B]">schedule</span>
-                    <span>{office.hours}</span>
+                {/* Tile 4: Working Hours */}
+                <div className="p-4 rounded-2xl bg-white/70 border border-[#08184E]/10 shadow-2xs backdrop-blur-xs flex items-start gap-3.5 hover:bg-white/90 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-[#08184E]/5 text-[#08184E] flex items-center justify-center shrink-0 mt-0.5">
+                    <span className="material-symbols-outlined text-xl text-gold-600">schedule</span>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[10.5px] uppercase tracking-wider text-[#6E665B] font-bold block mb-1">
+                      Working Hours
+                    </span>
+                    <div className="text-xs font-semibold text-[#1A1815]">
+                      {office.hours}
+                    </div>
+                    <span className="text-[11px] text-[#6E665B] block mt-0.5">
+                      Monday to Friday (GST • UTC+4)
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* Bottom Card Bar */}
             <div className="pt-4 border-t border-white/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <span className="text-xs text-[#6E665B] font-sans">Official Bureau of Engineering Studies (BEST) Headquarters</span>
+              <span className="text-xs text-[#6E665B] font-sans">
+                Official Bureau of Engineering Studies Consulting Engineers L.L.C Headquarters
+              </span>
               <a
                 href={office.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-sans font-bold text-[#08184E] hover:text-gold-700 transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/80 border border-[#08184E]/10 text-xs font-sans font-bold text-[#08184E] hover:text-gold-700 hover:border-gold-500/40 transition-all shadow-2xs self-start sm:self-auto"
               >
                 <span>View on Google Maps</span>
                 <span className="material-symbols-outlined text-sm">north_east</span>
@@ -197,7 +286,7 @@ export default function ContactView({ onOpenEstimator }) {
                 RFP Inquiry Transmitted Successfully
               </h3>
               <p className="text-xs sm:text-sm text-[#4A443C] max-w-lg mx-auto font-sans">
-                Thank you, <strong className="text-[#08184E]">{formData.fullName}</strong>. Your inquiry has been registered in the Bureau of Engineering Studies (BEST) registry under tracking reference:
+                Thank you, <strong className="text-[#08184E]">{formData.fullName}</strong>. Your inquiry has been registered in the Bureau of Engineering Studies Consulting Engineers L.L.C registry under tracking reference:
               </p>
               <div className="font-sans text-base sm:text-lg font-bold text-[#08184E] px-4 py-2 glass-badge rounded-xl inline-block shadow-sm">
                 {rfpCode}
@@ -416,7 +505,7 @@ export default function ContactView({ onOpenEstimator }) {
             <ul className="space-y-2.5 text-xs text-[#4A443C] font-sans">
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-gold-600 text-sm">verified</span>
-                <span>Dubai Municipality G+Unlimited Structural License</span>
+                <span>Dubai Municipality G+4 Structural License</span>
               </li>
               <li className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-gold-600 text-sm">verified</span>

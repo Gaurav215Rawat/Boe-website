@@ -325,7 +325,7 @@ Authority approvals in Dubai now mandate coordinated digital models. Bureau of E
                   {readingArticle.title}
                 </h2>
                 <div className="text-xs font-sans text-[#6E665B]">
-                  Published by <span className="text-[#08184E] font-semibold">{readingArticle.author}</span> · Bureau of Engineering Studies (BEST) Consulting Engineers LLC
+                  Published by <span className="text-[#08184E] font-semibold">{readingArticle.author}</span> · Bureau of Engineering Studies Consulting Engineers L.L.C
                 </div>
               </div>
 
