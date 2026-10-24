@@ -247,7 +247,7 @@ export default function HomeView({
           </div>
 
           {/* Metric Telemetry Counters in a Slim, Transparent Floating Frosted Glass Bar */}
-          <div className="py-3.5 px-6 sm:px-8 rounded-2xl glass-card-bar grid grid-cols-2 md:grid-cols-5 gap-4 sm:gap-6 items-center">
+          <div className="py-3.5 px-6 sm:px-8 rounded-2xl glass-card-bar grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 items-center">
             <div className="space-y-0.5">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">
                 <AnimatedCounter end={5000} suffix="+" />
@@ -268,15 +268,6 @@ export default function HomeView({
 
             <div className="space-y-0.5">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">
-                <AnimatedCounter end={40} suffix="M+ Sq.Ft" />
-              </div>
-              <div className="font-sans text-[10px] uppercase tracking-wider text-[#4A443C] font-bold">
-                Engineered Built-up Area
-              </div>
-            </div>
-
-            <div className="space-y-0.5">
-              <div className="font-serif text-2xl sm:text-3xl font-bold text-[#08184E]">
                 GCC & India
               </div>
               <div className="font-sans text-[10px] uppercase tracking-wider text-[#4A443C] font-bold">
@@ -284,7 +275,7 @@ export default function HomeView({
               </div>
             </div>
 
-            <div className="space-y-0.5 col-span-2 md:col-span-1">
+            <div className="space-y-0.5">
               <div className="font-serif text-2xl sm:text-3xl font-bold text-gold-700">
                 G+4 Licence
               </div>
@@ -315,8 +306,6 @@ export default function HomeView({
               <span>Value Engineering & Peer Review Audits</span>
               <span className="text-gold-600">◆</span>
               <span>Architect of Record & Authority Approvals</span>
-              <span className="text-gold-600">◆</span>
-              <span>BIM Level 3 Digital Twin Modeling</span>
               <span className="text-gold-600">◆</span>
             </div>
           ))}
@@ -547,19 +536,19 @@ export default function HomeView({
               desc: 'Established with primary focus on high-rise structural design and authority engineering approvals.',
             },
             {
-              year: '2015',
+              year: '2012',
               title: 'Aviation Hangar Pioneer',
               desc: 'Engineered our first major 100m+ clear-span aircraft maintenance hangar for DC Aviation at Dubai South.',
             },
             {
               year: '2020',
               title: 'Regional Expansion',
-              desc: 'Expanded structural consultancy across Muscat Oman, Lusail Qatar, and luxury Palm Jumeirah master villas.',
+              desc: 'Expanded structural consultancy across Muscat Oman and Lusail Qatar.',
             },
             {
               year: '2026+',
-              title: '1,000+ Projects & Future',
-              desc: 'Delivering mega-towers, BIM digital twin handovers, and sustainable luxury developments.',
+              title: '5,000+ Projects & Future',
+              desc: 'Delivering mega-towers, comprehensive engineering handovers, and sustainable luxury developments.',
             },
           ].map((m, idx) => (
             <div

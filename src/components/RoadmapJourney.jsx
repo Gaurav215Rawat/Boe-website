@@ -19,7 +19,7 @@ export default function RoadmapJourney({ milestones = [] }) {
       lightColor: '#FFEBE6',
     },
     {
-      year: '2014',
+      year: '2012',
       title: 'Aviation & Large-Span Milestone',
       badge: 'AVIATION SPECIALTY',
       desc: 'Commissioned for first wide-body aircraft MRO hangar at Dubai South (DWC), establishing our specialized large-span aviation practice.',
@@ -50,10 +50,10 @@ export default function RoadmapJourney({ milestones = [] }) {
     },
     {
       year: '2024+',
-      title: 'Digital Engineering & BIM Level 3',
+      title: 'Advanced Engineering & Scale',
       badge: 'INNOVATION',
-      desc: 'Delivering 40M+ sq.ft across 1,000+ completed developments with automated FEA modeling, 4D BIM digital twins, and advanced value engineering.',
-      metric: '1,000+ Landmark Projects · 4D Digital Twins',
+      desc: 'Delivering 40M+ sq.ft across 5,000+ completed developments with automated FEA modeling and advanced value engineering.',
+      metric: '5,000+ Landmark Projects · GCC & India',
       icon: 'hub',
       color: '#08184E', // Royal Navy & Gold
       lightColor: '#E8EEFA',

@@ -18,7 +18,7 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
       badge: 'FOUNDATION',
     },
     {
-      year: '2014',
+      year: '2012',
       title: 'Aviation & Large-Span Milestone',
       desc: 'Commissioned for first wide-body aircraft MRO hangar at Dubai South (DWC), establishing our specialized large-span aviation practice.',
       badge: 'AVIATION SPECIALTY',
@@ -37,8 +37,8 @@ export default function AboutView({ staff = [], onOpenEstimator }) {
     },
     {
       year: '2024+',
-      title: 'Digital Engineering & BIM Level 3',
-      desc: 'Delivering 40M+ sq.ft across 5000+ completed developments with automated FEA modeling, 4D BIM digital twins, and advanced value engineering.',
+      title: 'Advanced Engineering & Scale',
+      desc: 'Delivering 40M+ sq.ft across 5,000+ completed developments with automated FEA modeling and advanced value engineering.',
       badge: 'INNOVATION',
     },
   ];

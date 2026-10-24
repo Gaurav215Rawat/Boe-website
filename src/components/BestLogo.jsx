@@ -6,12 +6,12 @@ export default function BestLogo({
   size = 'md',
   isLight = false 
 }) {
-  // Dimensions for the official BEST logo mark
+  // Dimensions for the official BEST logo mark (sharp edges matching official image)
   const badgeSizes = {
-    sm: 'h-8 rounded-md',
-    md: 'h-10 sm:h-11 rounded-lg',
-    lg: 'h-12 sm:h-14 rounded-xl',
-    xl: 'h-16 sm:h-20 rounded-2xl',
+    sm: 'h-8 rounded-none',
+    md: 'h-10 sm:h-11 rounded-none',
+    lg: 'h-12 sm:h-14 rounded-none',
+    xl: 'h-16 sm:h-20 rounded-none',
   };
 
   const badgeClass = badgeSizes[size] || badgeSizes.md;
@@ -21,7 +21,7 @@ export default function BestLogo({
       <img
         src="/images/best-official-logo.jpg"
         alt="BEST Logo"
-        className={`object-contain shadow-sm border border-[#08184E]/20 select-none shrink-0 ${badgeClass} ${className}`}
+        className={`object-contain select-none shrink-0 rounded-none ${badgeClass} ${className}`}
       />
     );
   }
@@ -32,7 +32,7 @@ export default function BestLogo({
       <img
         src="/images/best-official-logo.jpg"
         alt="BEST Logo"
-        className={`object-contain shadow-sm border border-[#08184E]/20 select-none shrink-0 ${badgeClass}`}
+        className={`object-contain select-none shrink-0 rounded-none ${badgeClass}`}
       />
 
       {/* Typography Label */}
